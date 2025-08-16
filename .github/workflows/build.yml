@@ -1,17 +1,19 @@
 name: build
 on:
   workflow_dispatch: {}
-permissions:
-  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        device: [oneplus6, oneplus6t]
     steps:
       - uses: actions/checkout@v4
       - run: |
           curl -L https://7-zip.org/a/7z2501-linux-x64.tar.xz | tar -xJf -
           sudo cp 7zzs /bin/7z
-          bash oneplus6/build.sh
+          bash '${{ matrix.device }}/build.sh'
       - uses: actions/upload-artifact@v4
         with:
-          path: oneplus6_dualboot.7z
+          name: '${{ matrix.device }}_dualboot'
+          path: '${{ matrix.device }}_dualboot.7z'
