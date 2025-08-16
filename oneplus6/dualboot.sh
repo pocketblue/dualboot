@@ -6,7 +6,7 @@ which adb
 which fastboot
 
 echo 'waiting for device appear in fastboot'
-fastboot getvar product 2>&1 | grep 'sdm845'
+fastboot getvar product 2>&1 | grep sdm845
 fastboot erase op2 2> /dev/null || true
 fastboot flash dtbo_a images/lineage_dtbo.img
 fastboot flash dtbo_b images/lineage_dtbo.img
@@ -53,7 +53,7 @@ adb shell rm /tmp/fedora_root.tar.xz
 adb reboot bootloader
 
 echo 'waiting for device appear in fastboot'
-fastboot getvar product 2>&1 | grep 'sdm845'
+fastboot getvar product 2>&1 | grep sdm845
 fastboot erase dtbo_a
 fastboot flash dtbo_b      images/lineage_dtbo.img
 fastboot flash boot_a      images/uboot_enchilada.img
