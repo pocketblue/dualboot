@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -uexo pipefail
+
 mkdir images
 
 curl -L https://github.com/fedora-remix-mobility/u-boot/releases/download/fedora-mobility-v0.0.1/uboot-sdm845-oneplus-enchilada.img -o images/uboot_enchilada.img
