@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          curl -L https://7-zip.org/a/7z2501-linux-arm64.tar.xz | tar -xJf -
+          curl -L https://7-zip.org/a/7z2501-linux-x64.tar.xz | tar -xJf -
           sudo cp 7zzs /bin/7z
           bash oneplus6/build.sh
       - uses: actions/upload-artifact@v4
