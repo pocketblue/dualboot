@@ -60,4 +60,3 @@ fastboot flash boot_a      images/uboot_enchilada.img
 fastboot flash boot_b      images/lineage_boot.img
 fastboot flash fedora_esp  images/fedora_esp.raw
 fastboot flash fedora_boot images/fedora_boot.raw
-
