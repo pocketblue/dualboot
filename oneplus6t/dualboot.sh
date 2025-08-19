@@ -14,11 +14,7 @@ fastboot --set-active=a
 fastboot flash boot images/twrp_fajita.img --slot=all
 fastboot reboot
 
-set +x
-echo 'waiting for device appear in adb'
-until adb devices 2>/dev/null | grep recovery --silent ; do sleep 1; done
-set -x
-
+adb wait-for-recovery
 adb shell getprop ro.product.device | grep OnePlus6
 until adb shell twrp unmount /data ; do sleep 1; done
 adb push images/sgdisk /bin/sgdisk
