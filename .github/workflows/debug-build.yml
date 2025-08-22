@@ -33,6 +33,9 @@ jobs:
           # pack rootfs into an archive
           mkdir rootfs
           sudo mount -o ro,loop images/root.raw rootfs
+          ls
+          ls rootfs
+          ls rootfs/root
           sudo tar -C rootfs/root -cpf root.tar .
           sudo chmod 666 root.tar
 
