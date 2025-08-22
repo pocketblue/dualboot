@@ -21,8 +21,7 @@ jobs:
 
       - name: Post-process images
         run: |
-          curl -L https://7-zip.org/a/7z2501-linux-x64.tar.xz | tar -xJf -
-          sudo cp 7zzs /usr/local/bin/7z
+          sudo apt -y install 7zip
 
           mkdir artifacts
 
