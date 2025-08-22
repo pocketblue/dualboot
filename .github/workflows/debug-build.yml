@@ -31,12 +31,9 @@ jobs:
           cp images/esp.raw artifacts/esp.raw
 
           # pack rootfs into an archive
-          mkdir rootfs
-          sudo mount -o ro,loop images/root.raw rootfs
-          ls
-          ls rootfs
-          ls rootfs/root
-          sudo tar -C rootfs/root -cpf root.tar .
+          mkdir root
+          sudo mount -o ro,loop images/root.raw root
+          sudo tar -C root -cpf root.tar .
           sudo chmod 666 root.tar
 
           # compress rootfs
