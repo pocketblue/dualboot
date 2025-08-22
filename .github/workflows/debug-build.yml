@@ -1,0 +1,48 @@
+name: debug build
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v4
+
+      - name: Build the images
+        uses: pocketblue/actions/partition-images@main
+        with:
+          config_file: ./config.toml
+          esp_size: 268435456
+          rootfs: ext4
+          registry: ${{ vars.REGISTRY }}
+          image_name: oneplus6-gnome-mobile
+          image_tag: 42
+
+      - name: Post-process images
+        run: |
+          curl -L https://7-zip.org/a/7z2501-linux-x64.tar.xz | tar -xJf -
+          sudo cp 7zzs /usr/local/bin/7z
+
+          mkdir artifacts
+
+          # boot and esp images are unchanged
+          cp images/boot.raw artifacts/boot.raw
+          cp images/esp.raw artifacts/esp.raw
+
+          # pack rootfs into an archive
+          mkdir rootfs
+          sudo mount -o ro,loop images/root.raw rootfs
+          sudo tar -C rootfs/root -cpf root.tar .
+          sudo chmod 666 root.tar
+
+          # compress rootfs
+          7z a -txz -mx=9 artifacts/root.tar.xz root.tar
+
+          7z a -mx9 dualboot.7z artifacts/boot.raw artifacts/esp.raw artifacts/root.tar.xz
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: 'dualboot'
+          path: 'dualboot.7z'
