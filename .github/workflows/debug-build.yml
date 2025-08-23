@@ -28,17 +28,18 @@ jobs:
           # boot and esp images are unchanged
           cp images/boot.raw artifacts/boot.raw
           cp images/esp.raw artifacts/esp.raw
+          cp images/root.raw artifacts/root.raw
 
           # pack rootfs into an archive
-          mkdir root
-          sudo mount -o ro,loop images/root.raw root
-          sudo tar -C root -cpf root.tar .
-          sudo chmod 666 root.tar
+          # mkdir root
+          # sudo mount -o ro,loop images/root.raw root
+          # sudo tar -C root -cpf root.tar .
+          # sudo chmod 666 root.tar
 
           # compress rootfs
-          7z a -txz -mx=9 artifacts/root.tar.xz root.tar
+          # 7z a -txz -mx=9 artifacts/root.tar.xz root.tar
 
-          7z a -mx9 dualboot.7z artifacts/boot.raw artifacts/esp.raw artifacts/root.tar.xz
+          7z a -mx9 dualboot.7z artifacts/boot.raw artifacts/esp.raw artifacts/root.raw
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
