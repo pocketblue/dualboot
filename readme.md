@@ -1,9 +1,9 @@
-# not wokring yet, just testing!!!
+# not working yet, just testing!!!
 
 ### troubleshooting if your device is not visible in orangefox recovery
 
 - this can happen if you deleted userdata partition and not created new one
-- this can't be fixed from twrp, only can be fixed from orangefox 
+- this can't be fixed from twrp, only can be fixed from orangefox
 - flash orangefox
 - go to orangefox menu -> adb & sideload
 - turn adb switch on and off on top of the screen
