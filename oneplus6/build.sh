@@ -8,6 +8,6 @@ curl -L -e https://dl.twrp.me/enchilada https://dl.twrp.me/enchilada/twrp-3.7.0_
 curl -L https://mirrorbits.lineageos.org/full/enchilada/20250917/boot.img -o images/lineage_boot.img
 curl -L https://mirrorbits.lineageos.org/full/enchilada/20250917/dtbo.img -o images/lineage_dtbo.img
 curl -L https://mirrorbits.lineageos.org/full/enchilada/20250917/lineage-22.2-20250917-nightly-enchilada-signed.zip -o images/lineage_rom.zip
-install -Dm 0755 dualboot.sh dualboot_oneplus6_enchilada.sh
+install -Dm 0755 flash_dualboot.sh dualboot_oneplus6_enchilada.sh
 
 7z a -mx9 dualboot_oneplus6.7z dualboot_oneplus6_enchilada.sh images
