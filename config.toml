@@ -8,4 +8,4 @@ mountpoint = "/boot"
 size = 209715200
 
 [customizations.kernel]
-append = "root=PARTLABEL=userdata"
+append = "root=PARTLABEL=userdata ostree.prepare-root.composefs=0"
