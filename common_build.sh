@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -uexo pipefail
+
 mv images/boot.raw images/fedora_boot.raw
 mv images/esp.raw  images/fedora_esp.raw
 mv images/root.raw  images/fedora_root.raw
