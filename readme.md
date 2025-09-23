@@ -1,4 +1,4 @@
-### fedora atomic pocketblue remix + lineage os dualboot on oneplus6
+### fedora pocketblue remix + lineage os dualboot on oneplus6
 
 - [install on oneplus6 / oneplus6t](docs/oneplus6.md)
 
