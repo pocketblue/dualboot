@@ -1,13 +1,5 @@
-# not working yet, just testing!!!
+### fedora atomic pocketblue remix + lineage os dualboot on oneplus6
 
-### troubleshooting if your device is not visible in orangefox recovery
+- [install on oneplus6 / oneplus6t](docs/oneplus6.md)
 
-- this can happen if you deleted userdata partition and not created new one
-- this can't be fixed from twrp, only can be fixed from orangefox
-- flash orangefox
-- go to orangefox menu -> adb & sideload
-- turn adb switch on and off on top of the screen
-- swipe `swipe to start sideload` slider on the bottom of the screen
-- press X on the left top corner of the screen
-- try `adb devices` again
-- another way to fix it is flash stock rom via edl
+this repo provides linux and android dualboot on single ext4 partition, that means you don't need to split your storage on 2 parts and both systems use shared storage space
