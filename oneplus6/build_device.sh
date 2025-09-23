@@ -11,7 +11,7 @@ curl -L -e https://dl.twrp.me/$device https://dl.twrp.me/$device/twrp-3.7.0_11-0
 
 curl -L https://mirrorbits.lineageos.org/full/$device/$lineage_build/boot.img -o images/lineage_boot.img
 curl -L https://mirrorbits.lineageos.org/full/$device/$lineage_build/dtbo.img -o images/lineage_dtbo.img
-# curl -L https://mirrorbits.lineageos.org/full/$device/$lineage_build/lineage-22.2-$lineage_build-nightly-$device-signed.zip -o images/lineage_rom.zip
+curl -L https://mirrorbits.lineageos.org/full/$device/$lineage_build/lineage-22.2-$lineage_build-nightly-$device-signed.zip -o images/lineage_rom.zip
 
 install -Dm 0755 ../oneplus6/flash_dualboot.sh flash_${model}_${device}_fedora_lineage_dualboot.sh
 sed -i s/@device@/$device/g flash_${model}_${device}_fedora_lineage_dualboot.sh
