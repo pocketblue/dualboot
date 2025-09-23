@@ -2,6 +2,12 @@
 
 set -uexo pipefail
 
+export device=@device@
+# export device=enchilada # for oneplus6
+# export device=fajita    # for oneplus6t
+
+echo $device | grep -E 'enchilada|fajita'
+
 which adb
 which fastboot
 
@@ -9,7 +15,7 @@ echo 'waiting for device appear in fastboot'
 fastboot getvar product 2>&1 | grep sdm845
 fastboot erase op2 2> /dev/null || true
 fastboot flash dtbo_a images/lineage_dtbo.img
-fastboot flash boot_a images/twrp_enchilada.img
+fastboot flash boot_a images/twrp_$device.img
 fastboot --set-active=a
 fastboot reboot
 
@@ -63,7 +69,10 @@ echo 'waiting for device appear in fastboot'
 fastboot getvar product 2>&1 | grep sdm845
 fastboot erase dtbo_a
 fastboot flash dtbo_b      images/lineage_dtbo.img
-fastboot flash boot_a      images/uboot_enchilada.img
+fastboot flash boot_a      images/uboot_$device.img
 fastboot flash boot_b      images/lineage_boot.img
 fastboot flash fedora_esp  images/fedora_esp.raw
 fastboot flash fedora_boot images/fedora_boot.raw
+
+echo 'done flashing, rebooting now'
+fastboot reboot

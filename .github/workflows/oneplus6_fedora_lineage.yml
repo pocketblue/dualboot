@@ -1,0 +1,44 @@
+name: oneplus6 fedora+lineage dualboot
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pocketblue/actions/partition-images@main
+        with:
+          config_file: ./config.toml
+          esp_size: 268435456
+          rootfs: ext4
+          registry: ${{ vars.REGISTRY }}
+          image_name: oneplus6-gnome-mobile
+          image_tag: 42
+      - name: oneplus6 common
+        run: |
+          curl -L https://7-zip.org/a/7z2501-linux-arm64.tar.xz | tar -xJf -
+          sudo cp 7zzs /bin/7z
+          bash oneplus6/build_common.sh
+      - name: oneplus6 enchilada
+        env:
+          model: oneplus6
+          device: enchilada
+          lineage_build: 20250917
+        run: |
+          bash oneplus6/build_device.sh
+      - name: oneplus6t fajita
+        env:
+          model: oneplus6t
+          device: fajita
+          lineage_build: 20250916
+        run: |
+          bash oneplus6/build_device.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oneplus6_enchilada_fedora_lineage_dualboot
+          path: enchilada/oneplus6_enchilada_fedora_lineage_dualboot.7z
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oneplus6t_fajita_fedora_lineage_dualboot
+          path: fajita/oneplus6t_fajita_fedora_lineage_dualboot.7z
