@@ -52,17 +52,9 @@ adb shell umount /mnt
 adb shell twrp format data
 
 # installing fedora root
-adb shell rm -rf /data/.stowaways
-adb shell mkdir -p /data/.stowaways/fedora
-adb push images/fedora_root.raw.gz /data/.stowaways/fedora_root.raw.gz
+adb push images/fedora_root.tar.gz /tmp
 echo 'unarchiving fedora_root.raw'
-adb shell gzip -d /data/.stowaways/fedora_root.raw.gz
-echo 'copying fedora root'
-adb shell mount -o loop,ro /data/.stowaways/fedora_root.raw /mnt
-adb shell cp -a /mnt/ostree /data/.stowaways/fedora
-adb shell mkdir -p /data/.stowaways/fedora/boot
-adb shell umount /mnt
-adb shell rm /data/.stowaways/fedora_root.raw
+adb shell tar -xzf /tmp/fedora_root.tar.gz -C /data
 adb reboot bootloader
 
 echo 'waiting for device appear in fastboot'
