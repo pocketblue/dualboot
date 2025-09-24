@@ -24,6 +24,7 @@ jobs:
         env:
           model: oneplus6
           device: enchilada
+          twrp: 3.7.0_11-0
           lineage_build: 20250917
         run: |
           bash oneplus6/build_device.sh
@@ -35,6 +36,7 @@ jobs:
         env:
           model: oneplus6t
           device: fajita
+          twrp: 3.7.0_9-0
           lineage_build: 20250916
         run: |
           rm -rf enchilada
