@@ -27,17 +27,18 @@ jobs:
           lineage_build: 20250917
         run: |
           bash oneplus6/build_device.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oneplus6_enchilada_fedora_lineage_dualboot
+          path: enchilada/oneplus6_enchilada_fedora_lineage_dualboot.7z
       - name: oneplus6t fajita
         env:
           model: oneplus6t
           device: fajita
           lineage_build: 20250916
         run: |
+          rm -rf enchilada
           bash oneplus6/build_device.sh
-      - uses: actions/upload-artifact@v4
-        with:
-          name: oneplus6_enchilada_fedora_lineage_dualboot
-          path: enchilada/oneplus6_enchilada_fedora_lineage_dualboot.7z
       - uses: actions/upload-artifact@v4
         with:
           name: oneplus6t_fajita_fedora_lineage_dualboot
