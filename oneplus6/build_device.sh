@@ -15,4 +15,4 @@ curl -L https://mirrorbits.lineageos.org/full/$device/$lineage_build/lineage-22.
 
 install -Dm 0755 ../oneplus6/flash_dualboot.sh flash_${model}_${device}_fedora_lineage_dualboot.sh
 sed -i s/@device@/$device/g flash_${model}_${device}_fedora_lineage_dualboot.sh
-7z a -mx0 ${model}_${device}_fedora_lineage_dualboot.7z images flash_${model}_${device}_fedora_lineage_dualboot.sh
+7z a -mx9 ${model}_${device}_fedora_lineage_dualboot.7z images flash_${model}_${device}_fedora_lineage_dualboot.sh
