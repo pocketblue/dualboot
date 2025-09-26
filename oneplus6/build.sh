@@ -25,7 +25,7 @@ curl -L https://mirrorbits.lineageos.org/full/$codename/$lineage_build/lineage-2
 
 # patch vendor.img to disable encryption
 7z x images/lineage_rom.zip -o./lineage_rom
-./payload-dumper-go lineage_rom/payload.bin
+payload-dumper-go lineage_rom/payload.bin
 sudo mount -o loop extracted_*/vendor.img /mnt
 sudo sed -E -i 's/,?fileencryption=[^, ]*//g' /mnt/etc/fstab.qcom
 sudo umount /mnt
