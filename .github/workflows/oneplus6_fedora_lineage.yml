@@ -29,7 +29,7 @@ jobs:
           model: oneplus6
           codename: enchilada
           twrp: 3.7.0_11-0
-          lineage_build: 20250917
+          lineage_build: 20250924
         run: |
           bash oneplus6/build.sh
       - uses: actions/upload-artifact@v4
@@ -41,7 +41,7 @@ jobs:
           model: oneplus6t
           codename: fajita
           twrp: 3.7.0_9-0
-          lineage_build: 20250916
+          lineage_build: 20250923
         run: |
           bash oneplus6/build_device.sh
       - uses: actions/upload-artifact@v4
