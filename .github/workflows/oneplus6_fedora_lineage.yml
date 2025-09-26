@@ -43,7 +43,7 @@ jobs:
           twrp: 3.7.0_9-0
           lineage_build: 20250923
         run: |
-          bash oneplus6/build_device.sh
+          bash oneplus6/build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: oneplus6t_fajita_fedora_lineage_dualboot
