@@ -2,7 +2,7 @@
 
 set -uexo pipefail
 
-export device=@device@
+export device=@device_codename@
 # export device=enchilada # for oneplus6
 # export device=fajita    # for oneplus6t
 
@@ -19,6 +19,7 @@ fastboot flash boot_a images/twrp_$device.img
 fastboot --set-active=a
 fastboot reboot
 
+echo 'waiting for device appear in adb'
 adb wait-for-recovery
 adb shell getprop ro.product.device | grep OnePlus6
 until adb shell twrp unmount /data ; do sleep 1; done

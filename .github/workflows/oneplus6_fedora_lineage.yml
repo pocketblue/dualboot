@@ -19,29 +19,28 @@ jobs:
         run: |
           curl -L https://7-zip.org/a/7z2501-linux-arm64.tar.xz | tar -xJf -
           sudo cp 7zzs /bin/7z
-          bash oneplus6/build_common.sh
+          bash common/build.sh
       - name: oneplus6 enchilada
         env:
           model: oneplus6
-          device: enchilada
+          codename: enchilada
           twrp: 3.7.0_11-0
           lineage_build: 20250917
         run: |
-          bash oneplus6/build_device.sh
+          bash oneplus6/build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: oneplus6_enchilada_fedora_lineage_dualboot
-          path: enchilada/oneplus6_enchilada_fedora_lineage_dualboot.7z
+          path: build/oneplus6_enchilada_fedora_lineage_dualboot.7z
       - name: oneplus6t fajita
         env:
           model: oneplus6t
-          device: fajita
+          codename: fajita
           twrp: 3.7.0_9-0
           lineage_build: 20250916
         run: |
-          rm -rf enchilada
           bash oneplus6/build_device.sh
       - uses: actions/upload-artifact@v4
         with:
           name: oneplus6t_fajita_fedora_lineage_dualboot
-          path: fajita/oneplus6t_fajita_fedora_lineage_dualboot.7z
+          path: build/oneplus6t_fajita_fedora_lineage_dualboot.7z
