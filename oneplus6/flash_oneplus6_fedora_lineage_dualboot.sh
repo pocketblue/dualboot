@@ -46,12 +46,6 @@ echo 'you can check progress on screen of your device'
 adb shell twrp install /tmp/lineage_rom.zip
 adb shell rm /tmp/lineage_rom.zip
 
-# disable encryption on slot b
-adb shell mount /dev/block/by-name/vendor_b /mnt
-adb shell 'sed -E -i "s/,?fileencryption=[^, ]*//g" /mnt/etc/fstab.qcom'
-adb shell umount /mnt
-adb shell twrp format data
-
 # installing fedora root
 adb push images/fedora_root.tar.gz /tmp
 echo 'unarchiving fedora_root.raw'
@@ -61,9 +55,10 @@ adb reboot bootloader
 echo 'waiting for device appear in fastboot'
 fastboot getvar product 2>&1 | grep sdm845
 fastboot erase dtbo_a
-fastboot flash dtbo_b      images/lineage_dtbo.img
 fastboot flash boot_a      images/uboot_$device.img
+fastboot flash dtbo_b      images/lineage_dtbo.img
 fastboot flash boot_b      images/lineage_boot.img
+fastboot flash vendor_b    images/lineage_vendor.img
 fastboot flash fedora_esp  images/fedora_esp.raw
 fastboot flash fedora_boot images/fedora_boot.raw
 
