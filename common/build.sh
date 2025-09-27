@@ -3,7 +3,9 @@
 set -uexo pipefail
 
 sudo mount -o loop,ro images/root.raw /mnt
-sudo tar -C /mnt -czf fedora_root.tar.gz ostree
+sudo tar -C /mnt -czf images/fedora_root.tar.gz ostree
+sudo umount /mnt
+rm images/root.raw
 
 mv images/boot.raw images/fedora_boot.raw
 mv images/esp.raw  images/fedora_esp.raw
