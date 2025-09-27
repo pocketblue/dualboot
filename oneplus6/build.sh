@@ -29,7 +29,7 @@ payload-dumper-go lineage_rom/payload.bin
 sudo mount -o loop extracted_*/vendor.img /mnt
 sudo sed -E -i 's/,?fileencryption=[^, ]*//g' /mnt/etc/fstab.qcom
 sudo umount /mnt
-cp extracted_*/vendor.img images/vendor.img
+cp extracted_*/vendor.img images/lineage_vendor.img
 
 # pack archive
 install -Dm 0755 ../oneplus6/flash_oneplus6_fedora_lineage_dualboot.sh flash_${model}_${codename}_fedora_lineage_dualboot.sh
