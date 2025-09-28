@@ -11,7 +11,7 @@ fastboot flash vbmeta_ab     images/vbmeta_disabled.img
 fastboot flash dtbo_ab       images/lineage_dtbo.img
 fastboot flash boot_b        images/lineage_boot.img
 fastboot flash boot_a        images/twrp.img
-fastboot flash vendor_boot_b images/vendor_boot_noencrypt.img
+# fastboot flash vendor_boot_b images/vendor_boot_noencrypt.img
 fastboot --set-active=a
 fastboot reboot
 
@@ -46,9 +46,9 @@ adb shell twrp install /tmp/lineage_rom.zip
 adb shell rm /tmp/lineage_rom.zip
 
 # disable encryption on slot b
-adb shell mount /dev/block/by-name/vendor_boot_b /mnt
+adb shell mount /dev/block/by-name/vendor_b /mnt
 export disabled_encryption='/dev/block/bootdevice/by-name/userdata /data f2fs noatime,nosuid,nodev,discard,reserve_root=32768,resgid=1065,fsync_mode=nobarrier latemount,wait,check,formattable,quota,reservedsize=128M,checkpoint=fs,readahead_size_kb=128'
-adb shell "sed -i '/userdata/s|.*|$disabled_encryption|' /mnt/first_stage_ramdisk/fstab.qcom"
+adb shell "sed -i '/userdata/s|.*|$disabled_encryption|' /mnt/etc/fstab.qcom"
 adb shell umount /mnt
 adb shell twrp format data
 
