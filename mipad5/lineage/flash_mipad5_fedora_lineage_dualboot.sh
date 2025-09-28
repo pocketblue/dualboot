@@ -9,9 +9,9 @@ echo 'waiting for device appear in fastboot'
 fastboot getvar product 2>&1 | grep nabu
 fastboot flash vbmeta_ab     images/vbmeta_disabled.img
 fastboot flash dtbo_ab       images/lineage_dtbo.img
-fastboot flash vendor_boot_b images/lineage_vendor_boot.img
 fastboot flash boot_b        images/lineage_boot.img
 fastboot flash boot_a        images/twrp.img
+fastboot flash vendor_boot_b images/vendor_boot_noencrypt.img
 fastboot --set-active=a
 fastboot reboot
 

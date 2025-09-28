@@ -25,8 +25,8 @@ git clone --depth=1 https://android.googlesource.com/platform/external/avb
 python avb/avbtool.py make_vbmeta_image --flags 2 --padding_size 4096 --output images/vbmeta_disabled.img
 
 # patch vendor_boot to disable encryption
-bash disable_encryption.sh
+bash mipad5/lineage/disable_encryption.sh
 
 # pack archive
-install -Dm 0755 mipad5/flash_mipad5_fedora_lineage_dualboot.sh flash_mipad5_fedora_lineage_dualboot.sh
+install -Dm 0755 mipad5/lineage/flash_mipad5_fedora_lineage_dualboot.sh flash_mipad5_fedora_lineage_dualboot.sh
 7z a -mx9 mipad5_fedora_lineage_dualboot.7z images flash_mipad5_fedora_lineage_dualboot.sh

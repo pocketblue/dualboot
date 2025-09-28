@@ -24,7 +24,7 @@ jobs:
           bash common/build.sh
       - name: building mipad5 second step
         run: |
-          bash mipad5/build.sh
+          bash mipad5/lineage/build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: mipad5_fedora_lineage_dualboot

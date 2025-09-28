@@ -20,7 +20,7 @@ gzip -dc out/vendor_ramdisk > ramdisk.cpio
 mkdir patched
 cd patched
 cpio -idmv < ../ramdisk.cpio
-git apply ../disable_encryption.patch
+git apply ../mipad5/lineage/disable_encryption.patch
 find . | cpio -o -H newc | gzip -9 > ../patched_vendor_ramdisk.cpio.gz
 cd ..
 
