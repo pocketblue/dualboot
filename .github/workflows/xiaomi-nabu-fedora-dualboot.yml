@@ -1,0 +1,24 @@
+name: xiaomi-nabu fedora dualboot
+on:
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v4
+      - name: dependencies
+        run: |
+          curl -L https://7-zip.org/a/7z2501-linux-arm64.tar.xz | tar -xJf -
+          sudo cp 7zzs /bin/7z
+      - uses: pocketblue/actions/images@main
+        with:
+          device: xiaomi-nabu
+          registry: quay.io/pocketblue
+          image_name: xiaomi-nabu-gnome-desktop
+          image_tag: 42
+          rootfs: ext4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xiaomi-nabu-fedora-dualboot
+          path: xiaomi-nabu-fedora-dualboot.7z
