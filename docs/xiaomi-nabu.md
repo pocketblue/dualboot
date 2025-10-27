@@ -1,0 +1,38 @@
+### dualbooting fedora and android
+
+- go through the [manual installation](#manual-installation), but skip flashing `fedora_rootfs.raw` to `userdata` partition
+- flash android dtbo to slot a
+  - `curl curl -L https://github.com/ArKT-7/automated-nabu-lineage-installer/releases/download/lineage-22.1-20250207-UNOFFICIAL-nabu/dtbo.img -o images/lineage-dtbo.img`
+  - `fastboot flash dtbo_a android/dtbo.img`
+- install twrp to slot a and boot it
+  - `curl https://github.com/ArKT-7/twrp_device_xiaomi_nabu/releases/download/mod_linux/V4-MODDED-TWRP-LINUX.img -Lo android/twrp.img`
+  - `fastboot --set-active=a`
+  - `fastboot flash boot_a android/twrp.img`
+  - `fastboot reboot`
+- print your partition layout
+  - `adb shell parted /dev/block/sda print`
+- make sure that partition `31` is `userdata`
+  - `adb shell parted /dev/block/sda print | grep userdata | grep -E '^31'`
+- delete your `userdata` partition, this wipes all you data
+  - `adb shell sgdisk --delete=31 /dev/block/sda`
+- create `userdata` and `fedora_root` partitions
+  - `export start=$(adb shell parted -m /dev/block/sda print free | tail -1 | cut -d: -f2)`
+  - `adb shell parted -s /dev/block/sda -- mkpart userdata ext4 $start 50%`
+  - `adb shell parted -s /dev/block/sda -- mkpart fedora_root ext4 50% 100%`
+- install any android rom to slot b
+  - `adb push android/rom.zip /tmp/android_rom.zip`
+  - `adb shell twrp install /tmp/android_rom.zip`
+- reboot to bootloader
+  - `adb reboot bootloader`
+- flash `fedora_rootfs.raw` to `fedora_root` partition, this will wipe your android data
+  - `fastboot flash fedora_root images/fedora_rootfs.raw`
+- flash android images to slot b
+  - `fastboot flash boot_b android/boot.img`
+  - `fastboot flash vendor_boot_b android/vendor_boot.img`
+  - `fastboot flash dtbo_b android/dtbo.img`
+- erase dtbo on slot a
+  - `fastboot erase dtbo_a`
+- flash `uboot.img`, to slot a
+  - `fastboot flash boot_a images/uboot.img`
+- flash `vbmeta-disabled.img`, this disables verified boot and also required for system to boot
+  - `fastboot flash vbmeta_ab images/vbmeta-disabled.img`
