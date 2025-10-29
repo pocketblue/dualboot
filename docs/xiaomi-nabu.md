@@ -1,6 +1,6 @@
 ### dualbooting fedora and android
 
-- go through the [manual installation](#manual-installation), but skip flashing `fedora_rootfs.raw` to `userdata` partition
+- go through the [manual installation](https://github.com/pocketblue/pocketblue/blob/main/docs/xiaomi-nabu.md#manual-installation), but skip flashing `fedora_rootfs.raw` to `userdata` partition
 - flash android dtbo to slot a
   - `curl curl -L https://github.com/ArKT-7/automated-nabu-lineage-installer/releases/download/lineage-22.1-20250207-UNOFFICIAL-nabu/dtbo.img -o images/lineage-dtbo.img`
   - `fastboot flash dtbo_a android/dtbo.img`
