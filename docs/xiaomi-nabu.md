@@ -24,7 +24,7 @@
   - `adb shell twrp install /tmp/android_rom.zip`
 - reboot to bootloader
   - `adb reboot bootloader`
-- flash `fedora_rootfs.raw` to `fedora_root` partition, this will wipe your android data
+- flash `fedora_rootfs.raw` to `fedora_root` partition
   - `fastboot flash fedora_root images/fedora_rootfs.raw`
 - flash android images to slot b
   - `fastboot flash boot_b android/boot.img`
