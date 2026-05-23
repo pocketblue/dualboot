@@ -1,0 +1,36 @@
+diff --git a/refind/menu.c b/refind/menu.c
+index f6b455f..170675d 100644
+--- a/refind/menu.c
++++ b/refind/menu.c
+@@ -199,19 +199,19 @@ static VOID UpdateScroll(IN OUT SCROLL_STATE *State, IN UINTN Movement)
+     State->PreviousSelection = State->CurrentSelection;
+ 
+     switch (Movement) {
+-        case SCROLL_LINE_LEFT:
++	case SCROLL_LINE_UP://SCROLL_LINE_LEFT:
+             if (State->CurrentSelection > 0) {
+                 State->CurrentSelection --;
+             }
+             break;
+ 
+-        case SCROLL_LINE_RIGHT:
++	case SCROLL_LINE_DOWN://SCROLL_LINE_RIGHT:
+             if (State->CurrentSelection < State->MaxIndex) {
+                 State->CurrentSelection ++;
+             }
+             break;
+ 
+-        case SCROLL_LINE_UP:
++        /*case SCROLL_LINE_UP:
+             if (State->ScrollMode == SCROLL_MODE_ICONS) {
+                if (State->CurrentSelection >= State->InitialRow1) {
+                   if (State->MaxIndex > State->InitialRow1) { // avoid division by 0!
+@@ -243,7 +243,7 @@ static VOID UpdateScroll(IN OUT SCROLL_STATE *State, IN UINTN Movement)
+                if (State->CurrentSelection < State->MaxIndex)
+                   State->CurrentSelection++;
+             } // if/else
+-            break;
++            break;*/
+ 
+         case SCROLL_PAGE_UP:
+            if (State->CurrentSelection <= State->FinalRow0)

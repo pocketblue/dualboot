@@ -1,0 +1,60 @@
+#!/sbin/sh
+# by codechara
+
+OUTFD=/proc/self/fd/$2
+ZIPFILE="$3"
+BASEDIR="/tmp/dbinst"
+TARGET="/dev/block/by-name/esp"
+
+ui_print() {
+	echo -e "ui_print $1\nui_print" >> $OUTFD
+}
+
+abort() {
+	ui_print ""
+	ui_print "ERROR: $1"
+	exit 1
+}
+
+mount_esp_if_not() {
+	if [ "$(mount | grep /esp)" == "" ]; then
+		mount $TARGET /esp || abort "Failed to mount esp!!!"
+	fi
+}
+
+ui_print ""
+ui_print "+-----------------------------------------+"
+ui_print "| Dualboot files installer for Pocketblue |"
+ui_print "|             by codechara                |"
+ui_print "+-----------------------------------------+"
+
+# Checking for esp partition existance
+if [ ! -e $TARGET ]; then abort "\"esp\" partition doesn't exists!"; fi
+
+# Decompressing install files
+ui_print "Decompressing installation files..."
+unzip $ZIPFILE -d $BASEDIR || abort "Failed to decompress!"
+
+# Backup esp
+ui_print "Backing up original \"esp\" partition to \"/esp.original.raw\"..."
+dd if=$TARGET of=/esp.original.raw || abort "Failed to dump!!"
+
+# Copying original fedora
+ui_print "Copying original GRUB..."
+mount_esp_if_not
+cp /esp/EFI/fedora $BASEDIR/fedora -r || abort "Failed to copy GRUB \"/esp/EFI/fedora\""
+
+# Formatting esp properly, so both TWRP and Aloha UEFI can use esp
+ui_print "Formatting \"esp\"..."
+umount /esp
+mkfs.fat $TARGET || abort "Failed to format!"
+mount_esp_if_not
+
+# Installing files
+ui_print "Installing dualboot files & original GRUB..."
+mkdir /esp/EFI
+cp $BASEDIR/android $BASEDIR/BOOT $BASEDIR/fedora /esp/EFI -r
+mv /esp/EFI/fedora/shimaa64.efi /esp/EFI/fedora/shimaa64.efi_
+
+ui_print ""; ui_print "Done!! <3"
+exit 0
