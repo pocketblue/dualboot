@@ -11,6 +11,8 @@ jobs:
     uses: ./.github/workflows/xiaomi-nabu-reboot2android.yml
 
   dualboot-installer-zip:
+    permissions:
+      contents: write
     needs: [refind, reboot2android]
     runs-on: ubuntu-24.04
     steps:
