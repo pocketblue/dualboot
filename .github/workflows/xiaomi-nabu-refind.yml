@@ -1,0 +1,40 @@
+name: xiaomi-nabu-refind
+run-name: 'Xiaomi Pad 5 rEFInd'
+on:
+  workflow_dispatch: {}
+  workflow_call: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Setup
+        run: sudo apt update && sudo apt install -y build-essential tree gnu-efi
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          path: dualboot
+
+      - name: Checkout rEFInd
+        run: git clone https://git.code.sf.net/p/refind/code refind --depth=1
+
+      - name: Apply patch
+        run: cd refind && git apply ../dualboot/devices/xiaomi-nabu/rEFInd-HACK-fix-buttons.patch
+
+      - name: Build
+        run: cd refind && make
+
+      - name: Prepare artifact
+        run: |
+          mkdir output output/refind
+          cp refind/refind/refind_aa64.efi output/refind
+          cp refind/icons -r output/refind/
+          cp refind/themes -r output/refind/
+          cp dualboot/devices/xiaomi-nabu/refind.conf output/refind
+
+      - name: Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: refind
+          path: output

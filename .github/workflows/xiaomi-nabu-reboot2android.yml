@@ -1,0 +1,41 @@
+name: xiaomi-nabu-reboot2android
+run-name: 'Xiaomi Pad 5 Reboot2Android'
+on:
+  workflow_dispatch: {}
+  workflow_call: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Reboot2Android
+        uses: actions/checkout@v6
+        with:
+          repository: rodriguezst/Reboot2AndroidPkg
+      
+      - name: Checkout edk2
+        uses: actions/checkout@v6
+        with:
+          repository: tianocore/edk2
+          ref: edk2-stable202411
+          path: edk2
+          submodules: recursive
+
+      - name: Setup
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential uuid-dev iasl git gcc-aarch64-linux-gnu gcc-aarch64-linux-gnu
+
+      - name: Build
+        run: export GCC5_AARCH64_PREFIX=aarch64-linux-gnu- && make
+
+      - name: Prepare artifact
+        run: |
+          mkdir android
+          cp edk2/Build/Reboot2AndroidPkg/RELEASE_GCC5/AARCH64/Reboot2AndroidPkg/Application/Reboot2Android/Reboot2Android/OUTPUT/Reboot2Android.efi android/
+
+      - name: Artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: reboot2android
+          path: android
