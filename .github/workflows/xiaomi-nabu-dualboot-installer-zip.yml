@@ -1,4 +1,4 @@
-name: xiaomi-nabu-flashable
+name: xiaomi-nabu-dualboot-installer-zip
 run-name: Xiaomi Pad 5
 on:
   workflow_dispatch: {}
@@ -10,7 +10,7 @@ jobs:
   reboot2android:
     uses: ./.github/workflows/xiaomi-nabu-reboot2android.yml
 
-  flashable:
+  dualboot-installer-zip:
     needs: [refind, reboot2android]
     runs-on: ubuntu-24.04
     steps:
@@ -35,17 +35,17 @@ jobs:
       - name: Making zip
         run: |
           cd flashable
-          zip -r ../flashable.zip META-INF android BOOT
+          zip -r ../dualboot-installer.zip META-INF android BOOT
 
       - name: Artifact
         uses: actions/upload-artifact@v7
         with:
-          name: flashable
-          path: flashable.zip
+          name: dualboot-installer
+          path: dualboot-installer.zip
 
       - name: Release
         uses: softprops/action-gh-release@v3
         with:
-          name: Xiaomi Pad 5 Flashable
-          files: flashable.zip
+          name: Xiaomi Pad 5 Dualboot Installer ZIP
+          files: dualboot-installer.zip
           draft: true

@@ -3,7 +3,7 @@
 ## Preparing
 
 First, you should prepare:
-- [Dualboot flashable files](https://github.com/pocketblue/dualboot/releases)
+- [Dualboot Installer ZIP](https://github.com/pocketblue/dualboot/releases)
 - The Android ROM or Stock you want.
 - [Pocketblue image you want.](https://github.com/pocketblue/pocketblue/releases)
 - [TWRP](https://github.com/ArKT-7/nabu-files/raw/refs/heads/main/recovery/mod-linux-twrp.img)
@@ -28,7 +28,7 @@ fastboot flash linux images/fedora_rootfs.raw
 fastboot flash cust  images/fedora_boot.raw
 fastboot flash esp   images/fedora_esp.raw
 ```
-7. Then reboot to bootloader again and boot recovery (step 2). Flash **dualboot flashable files** (flashable.zip).
+7. Then reboot to bootloader again and boot recovery (step 2). Flash **Dualboot Installer ZIP** (dualboot-installer.zip).
 > [!WARNING]
 > If your tab stuck at rebooting, **do not force reboot it!** Just wait 5-10 mins and tablet will reboot itself (...or force reboot after 5-10 mins if still stuck).
 
